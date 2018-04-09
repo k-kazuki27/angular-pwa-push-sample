@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { environment } from '../environments/environment';
+
 
 @Injectable()
 export class WebPushService {
@@ -11,7 +13,7 @@ export class WebPushService {
   private API_URL: string;
 
   constructor(private http: HttpClient) {
-    this.API_URL = 'http://localhost:8080';
+    this.API_URL = environment.API_URL;
   }
 
   urlBase64ToUint8Array(base64String) {
@@ -43,7 +45,7 @@ export class WebPushService {
 
   deleteSubscriber(subscription) {
 
-    const url = `${this.API_URL}/register`;
+    const url = `${this.API_URL}/webpush`;
     console.log('[Push Service] Deleting subscriber');
 
     const body = {

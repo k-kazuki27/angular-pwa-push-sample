@@ -1,0 +1,28 @@
+{
+  "notification": {
+    "title": "Ranjeet Kumar",
+    "actions": [{
+      "action": "opentweet",
+      "title": "Open tweet"
+    }],
+    "body": "The latest The Top Javascript Blogs Daily! https://t.co/o3PSNkk9Di Thanks to @LifeWithKathy #makeyourownlane",
+    "dir": "auto",
+    "icon": "https://pbs.twimg.com/profile_images/854195961085734917/0X7AFONJ_normal.jpg",
+    "badge": "https://pbs.twimg.com/profile_images/854195961085734917/0X7AFONJ_normal.jpg",
+    "lang": "en",
+    "renotify": true,
+    "requireInteraction": true,
+    "tag": 926796012340920300,
+    "vibrate": [
+      300,
+      100,
+      400
+    ],
+    "data": {
+      "url": "https://twitter.com/statuses/926796012340920321",
+      "created_at": "Sat Nov 04 12:59:23 +0000 2017",
+      "favorite_count": 0,
+      "retweet_count": 0
+    }
+  }
+}

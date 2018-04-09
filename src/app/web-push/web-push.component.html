@@ -1,5 +1,8 @@
-<p>
-  web-push works!
-</p>
-
-<button (click)="trigger()">Click me!</button>
+<mat-card>
+  <mat-card-actions>
+    <button mat-raised-button (click)="subscribeToPush()">
+      <mat-icon>notifications_active</mat-icon>Subscribe for push</button>
+    <button mat-raised-button (click)="unsubscribeFromPush()">
+      <mat-icon>notifications_off</mat-icon>Unsubscribe</button>
+  </mat-card-actions>
+</mat-card>

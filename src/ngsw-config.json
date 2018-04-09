@@ -1,5 +1,9 @@
 {
   "index": "/index.html",
+  "appData": {
+    "name": "PWAtter v1",
+    "description": "Implemented update flow"
+  },
   "assetGroups": [{
     "name": "app",
     "installMode": "prefetch",
@@ -23,5 +27,37 @@
         "/assets/**"
       ]
     }
-  }]
+  }, {
+    "name": "fonts",
+    "resources": {
+      "urls": [
+        "https://fonts.googleapis.com/**",
+        "https://fonts.gstatic.com/**"
+      ]
+    }
+  }],
+  "dataGroups": [{
+      "name": "api-freshness",
+      "urls": [
+        "/timeline"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "3d",
+        "timeout": "10s"
+      }
+    },
+    {
+      "name": "api-performance",
+      "urls": [
+        "/favorites"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "3d"
+      }
+    }
+  ]
 }

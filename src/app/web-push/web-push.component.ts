@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { SwPush } from '@angular/service-worker';
+import { NotificationsService } from 'angular2-notifications';
 
 import { WebPushService } from '../web-push.service';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-web-push',
@@ -11,11 +14,16 @@ import { WebPushService } from '../web-push.service';
 export class WebPushComponent implements OnInit {
 
   private VAPID_PUBLIC_KEY: string;
-  constructor(private swPush: SwPush, private webPushService: WebPushService) {
+  private snackBarDuration = 2000;
+
+  constructor(private swPush: SwPush,
+    private webPushService: WebPushService,
+    public snackBar: MatSnackBar,
+    private notificationService: NotificationsService) {
   }
 
   ngOnInit() {
-    this.VAPID_PUBLIC_KEY = '';
+    this.VAPID_PUBLIC_KEY = environment.VAPID_PUBLIC_KEY;
   }
 
   subscribeToPush() {
@@ -25,12 +33,15 @@ export class WebPushComponent implements OnInit {
       serverPublicKey: this.VAPID_PUBLIC_KEY
     })
       .then(pushSubscription => {
-
         // Passing subscription object to our backend
         this.webPushService.addSubscriber(pushSubscription)
           .subscribe(
             res => {
               console.log('[App] Add subscriber request answer', res);
+              const snackBarRef = this.snackBar.open('Now you are subscribed', null, {
+                duration: this.snackBarDuration
+              });
+              this.receiveMessages();
             },
             err => {
               console.log('[App] Add subscriber request failed', err);
@@ -46,6 +57,7 @@ export class WebPushComponent implements OnInit {
 
     // Get active subscription
     this.swPush.subscription
+      // .take(1)
       .subscribe(pushSubscription => {
 
         console.log('[App] pushSubscription', pushSubscription);
@@ -56,6 +68,11 @@ export class WebPushComponent implements OnInit {
 
             res => {
               console.log('[App] Delete subscriber request answer', res);
+
+              const snackBarRef = this.snackBar.open('Now you are unsubscribed', null, {
+                duration: this.snackBarDuration
+              });
+
               // Unsubscribe current client (browser)
               pushSubscription.unsubscribe()
                 .then(success => {
@@ -71,15 +88,21 @@ export class WebPushComponent implements OnInit {
             }
           );
       });
-
   }
 
-  showMessages() {
+  private receiveMessages() {
     this.swPush.messages
       .subscribe(message => {
+
         console.log('[App] Push message received', message);
         const notification = message['notification'];
-        alert(notification);
+        const options = {
+          timeOut: 3000,
+          pauseOnHover: true,
+          clickToClose: true,
+          animate: 'fromRight'
+        };
+        this.notificationService.create(notification['title'], notification['msg'], 'success', options);
       });
   }
 }

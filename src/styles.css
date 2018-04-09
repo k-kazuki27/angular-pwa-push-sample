@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "https://fonts.googleapis.com/css?family=Material+Icons";
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+app-root,
+md-sidenav-container {
+  height: 100%;
+}
+
+md-sidenav {
+  width: 200px;
+}
+
+md-card-actions>button {
+  margin-bottom: 16px;
+}
+
+.content {
+  padding: 16px;
+}
+
+.mat-card {
+  margin-bottom: 16px;
+}
+
+small .mat-icon {
+  width: 12px;
+  height: 12px;
+}
+
+small .material-icons {
+  font-size: 12px;
+}
+
+.logo {
+  max-height: 40px;
+}
